@@ -1,10 +1,13 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector as useSelectorBase } from 'react-redux';
 
+import searchPageSlice from './search.slice';
+import userDetailSlice from './userDetail.slice';
+
 export const store = configureStore({
   reducer: {
-    // This is where we add reducers.
-    // Since we don't have any yet, leave this empty
+    searchPage: searchPageSlice.reducer,
+    userDetail: userDetailSlice.reducer,
   },
 });
 
@@ -21,3 +24,10 @@ export const useAppDispatch = () => useDispatch<TAppDispatch>();
 export const useAppSelector = <TSelected = unknown>(
   selector: (state: TRootState) => TSelected,
 ): TSelected => useSelectorBase<TRootState, TSelected>(selector);
+
+declare global {
+  export type TAction<T> = {
+    type: string;
+    payload: T;
+  };
+}
