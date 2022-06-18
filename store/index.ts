@@ -1,6 +1,7 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector as useSelectorBase } from 'react-redux';
 
+import favoriteSlice from './favorite.slice';
 import searchPageSlice from './search.slice';
 import userDetailSlice from './userDetail.slice';
 
@@ -8,6 +9,7 @@ export const store = configureStore({
   reducer: {
     searchPage: searchPageSlice.reducer,
     userDetail: userDetailSlice.reducer,
+    favorite: favoriteSlice.reducer,
   },
 });
 

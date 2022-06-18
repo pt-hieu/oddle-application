@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect } from 'react';
 
 import { IUser } from '@/models/user';
 import { useAppDispatch, useAppSelector } from '@/store';
+import { like, unlike } from '@/store/favorite.slice';
 import { loadUserDetail } from '@/store/userDetail.slice';
 
 type TProps = {
@@ -16,6 +17,14 @@ const formatter = Intl.NumberFormat('en', {
 
 export default memo(function UserCell({ userData }: TProps) {
   const query = useAppSelector(useCallback((s) => s.searchPage.query, []));
+
+  const isFavorite = useAppSelector(
+    useCallback(
+      (s) => s.favorite.users.some((user) => user.login === userData.login),
+      [userData.login],
+    ),
+  );
+
   const { login, avatar_url } = userData;
 
   const dispatch = useAppDispatch();
@@ -28,8 +37,16 @@ export default memo(function UserCell({ userData }: TProps) {
     dispatch(loadUserDetail(userData.login));
   }, [details]);
 
+  const addFavorite = useCallback(() => {
+    dispatch(like(userData.login));
+  }, [userData.login]);
+
+  const removeFavorite = useCallback(() => {
+    dispatch(unlike(userData.login));
+  }, [userData.login]);
+
   return (
-    <div className="p-2 shadow-[0_4px_4px_0_#0000001A] rounded-lg grid grid-cols-[64px,1fr] gap-x-2.5">
+    <div className="p-2 shadow-[0_4px_4px_0_#0000001A] rounded-lg grid grid-cols-[64px,1fr,16px] gap-x-2.5">
       <img
         className="rounded w-16 aspect-square"
         src={avatar_url}
@@ -58,6 +75,20 @@ export default memo(function UserCell({ userData }: TProps) {
             />
           )}
         </div>
+      </div>
+
+      <div className="text-red-oddle">
+        {isFavorite && (
+          <button onClick={removeFavorite}>
+            <span className="fa-solid fa-heart"></span>
+          </button>
+        )}
+
+        {!isFavorite && (
+          <button onClick={addFavorite}>
+            <span className="fa-regular fa-heart"></span>
+          </button>
+        )}
       </div>
     </div>
   );
