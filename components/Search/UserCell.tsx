@@ -46,7 +46,7 @@ export default memo(function UserCell({ userData }: TProps) {
   }, [userData.login]);
 
   return (
-    <div className="p-2 shadow-[0_4px_4px_0_#0000001A] rounded-lg grid grid-cols-[64px,1fr,16px] gap-x-2.5">
+    <div className="p-2 shadow-[0_4px_4px_0_#0000001A] rounded-lg grid grid-cols-[64px,1fr,16px] gap-x-2.5 h-fit">
       <img
         className="rounded w-16 aspect-square"
         src={avatar_url}
