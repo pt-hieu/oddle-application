@@ -6,7 +6,7 @@ import GhMark from '@/public/gh_mark.png';
 import { useAppSelector } from '@/store';
 import ResultContainer from '@/styles/styled-components/ResultContainer';
 
-import UserCell from './UserCell';
+import UserCell from '../UserCell';
 
 export default function ResultList() {
   const { error, loading, result, query } = useAppSelector(

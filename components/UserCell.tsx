@@ -1,57 +1,57 @@
+import Link from 'next/link';
 import { memo, useCallback, useEffect } from 'react';
 
+import { formatter } from '@/libs/format-number';
 import { IUser } from '@/models/user';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { like, unlike } from '@/store/favorite.slice';
-import { loadUserDetail } from '@/store/userDetail.slice';
+import { getUserDetail } from '@/store/userDetail.slice';
+import GridCell from '@/styles/styled-components/GridCell';
 
 type TProps = {
   userData: IUser;
 };
 
-const formatter = Intl.NumberFormat('en', {
-  notation: 'compact',
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 1,
-}).format;
-
 export default memo(function UserCell({ userData }: TProps) {
+  const { login, avatar_url } = userData;
   const query = useAppSelector(useCallback((s) => s.searchPage.query, []));
 
   const isFavorite = useAppSelector(
     useCallback(
-      (s) => s.favorite.users.some((user) => user.login === userData.login),
-      [userData.login],
+      (s) => s.favorite.users.some((user) => user.login === login),
+      [login],
     ),
   );
 
-  const { login, avatar_url } = userData;
-
   const dispatch = useAppDispatch();
   const details = useAppSelector(
-    useCallback((s) => s.userDetail[userData.login], [userData.login]),
+    useCallback((s) => s.userDetail[login], [login]),
   );
 
   useEffect(() => {
     if (details) return;
-    dispatch(loadUserDetail(userData.login));
+    dispatch(getUserDetail(login));
   }, [details]);
 
   const addFavorite = useCallback(() => {
-    dispatch(like(userData.login));
-  }, [userData.login]);
+    dispatch(like(login));
+  }, [login]);
 
   const removeFavorite = useCallback(() => {
-    dispatch(unlike(userData.login));
-  }, [userData.login]);
+    dispatch(unlike(login));
+  }, [login]);
 
   return (
-    <div className="p-2 shadow-[0_4px_4px_0_#0000001A] rounded-lg grid grid-cols-[64px,1fr,16px] gap-x-2.5 h-fit">
-      <img
-        className="rounded w-16 aspect-square"
-        src={avatar_url}
-        alt={`${login}'s avatar`}
-      />
+    <GridCell className="grid grid-cols-[64px,1fr,16px] gap-x-2.5">
+      <Link href={`/users/${login}`} passHref>
+        <a>
+          <img
+            className="rounded w-16 aspect-square"
+            src={avatar_url}
+            alt={`${login}'s avatar`}
+          />
+        </a>
+      </Link>
 
       <div className="truncate">
         <div title={login} className="mb-2.5 truncate">
@@ -67,8 +67,9 @@ export default memo(function UserCell({ userData }: TProps) {
             </>
           )}
 
-          {details?.loading && <div>Loading...</div>}
-          {details?.error && (
+          {details?.userLoading && <div>Loading...</div>}
+
+          {details?.userError && (
             <div
               title="Failed to fetch data of this user!"
               className="fa fa-warning"
@@ -90,6 +91,6 @@ export default memo(function UserCell({ userData }: TProps) {
           </button>
         )}
       </div>
-    </div>
+    </GridCell>
   );
 });

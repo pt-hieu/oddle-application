@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { interpolateAs } from 'next/dist/shared/lib/router/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useFirstMountState } from 'react-use';
 import tw from 'twin.macro';

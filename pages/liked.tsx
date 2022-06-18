@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { useCallback } from 'react';
 
 import Layout from '@/components/Layout';
-import UserCell from '@/components/Search/UserCell';
+import UserCell from '@/components/UserCell';
 import { useAppSelector } from '@/store';
 import HeaderTitle from '@/styles/styled-components/HeaderTitle';
 

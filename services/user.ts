@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { IRepository } from '@/models/repository';
 import { IUser, IUserWithDetails } from '@/models/user';
 
 export type TSearchParams = Partial<{
@@ -27,13 +28,20 @@ function search(params: TSearchParams) {
     .then((r) => r.data);
 }
 
-function getDetail(id: string) {
+function getDetail(login: string) {
   return axios
-    .get<IUserWithDetails>(process.env.api + '/users/' + id)
+    .get<IUserWithDetails>(process.env.api + '/users/' + login)
+    .then((r) => r.data);
+}
+
+function getRepos(login: string) {
+  return axios
+    .get<IRepository[]>(`${process.env.api}/users/${login}/repos`)
     .then((r) => r.data);
 }
 
 export const userApi = {
   search,
   getDetail,
+  getRepos,
 };
