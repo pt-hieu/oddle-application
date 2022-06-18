@@ -6,11 +6,13 @@ import Footer from './Footer';
 type TProps = {
   title: string;
   titleTemplate?: string;
+  footer?: boolean;
 };
 
 export default function Layout({
   title,
   titleTemplate = '@@ | Oddle FE Challenge',
+  footer = true,
   children,
 }: PropsWithChildren<TProps>) {
   return (
@@ -23,9 +25,11 @@ export default function Layout({
       </Head>
 
       <div className="w-[clamp(428px,466px,466px)] mobile:w-[428px] tablet:w-[clamp(428px,587px,587px)] mx-auto p-4 pb-0">
-        <div className="max-h-[calc(100vh-72px)] ">{children}</div>
+        <div className={`${footer ? 'max-h-[calc(100vh-72px)]' : ''}`}>
+          {children}
+        </div>
 
-        <Footer />
+        {footer && <Footer />}
       </div>
     </>
   );

@@ -20,6 +20,9 @@ function search(params: TSearchParams) {
   return axios
     .get<TSearchResponse>(process.env.api + '/search/users', {
       params,
+      headers: {
+        authorization: process.env.gh_token!,
+      },
     })
     .then((r) => r.data);
 }

@@ -23,10 +23,14 @@ export default function ResultList() {
         </ResultContainer>
       )}
 
-      {error && <div>Error!</div>}
+      {error && (
+        <ResultContainer className="grid place-content-center">
+          Error!
+        </ResultContainer>
+      )}
 
       {result && !!result.items.length && (
-        <ResultContainer className="overflow-y-auto">
+        <ResultContainer hasPaginator className="overflow-y-auto">
           <div className="mb-4 text-sm">
             {total_count} GitHub user{total_count! > 1 ? 's' : ''} found
           </div>
