@@ -1,11 +1,11 @@
 import { CaseReducer, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { IUserWithDetails } from '@/models/user';
+import { IUser, IUserWithDetails } from '@/models/user';
 
 import { TRootState } from '.';
 
 type TFavoriteSlice = {
-  users: IUserWithDetails[];
+  users: (IUser | IUserWithDetails)[];
   initialized: boolean;
 };
 
@@ -17,12 +17,18 @@ export const like = createAsyncThunk(
   'favorite/like',
   (userLogin: TUserLogin, thunk) => {
     const root = thunk.getState() as TRootState;
+
     const metaData = root.userDetail[userLogin];
+    const searchResults = root.searchPage.result;
 
-    if (!metaData || !metaData.user)
-      return thunk.rejectWithValue(new Error('User not found'));
+    if (metaData && metaData.user) return metaData.user;
 
-    return metaData.user;
+    const user = searchResults?.items.find((user) => user.login === userLogin);
+    if (user) {
+      return user;
+    }
+
+    return thunk.rejectWithValue('User not found');
   },
 );
 
