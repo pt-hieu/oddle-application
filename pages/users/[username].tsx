@@ -3,12 +3,17 @@ import { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import Layout from '@/components/Layout';
 import RepoList from '@/components/UserDetail/RepoList';
+import SocialList from '@/components/UserDetail/SocialList';
 import Summary from '@/components/UserDetail/Summary';
 import TabButton from '@/components/UserDetail/TabButton';
 import UserDetailHeader from '@/components/UserDetail/UserDetailHeader';
 import { userUserData } from '@/hooks/useUserData';
 import { useAppDispatch } from '@/store';
-import { getRepos } from '@/store/userDetail.slice';
+import {
+  getFollowers,
+  getFollowings,
+  getRepos,
+} from '@/store/userDetail.slice';
 
 enum Tabs {
   REPOSITORIES = 'repositories',
@@ -22,22 +27,57 @@ const UserDetailPage: NextPage = () => {
 
   const dispatch = useAppDispatch();
 
+  const {
+    repos,
+    followers,
+    followings,
+    followersLoading,
+    followingsLoading,
+    followersError,
+    followingsError,
+  } = userData || {};
+
   const TabRender = useMemo<Record<Tabs, ReactNode>>(
     () => ({
       [Tabs.REPOSITORIES]: <RepoList />,
-      [Tabs.FOLLOWERS]: <>v</>,
-      [Tabs.FOLLOWINGS]: <>c</>,
+      [Tabs.FOLLOWERS]: (
+        <SocialList
+          users={followers}
+          loading={followersLoading}
+          error={followersError}
+        />
+      ),
+      [Tabs.FOLLOWINGS]: (
+        <SocialList
+          users={followings}
+          loading={followingsLoading}
+          error={followingsError}
+        />
+      ),
     }),
-    [],
+    [
+      followers,
+      followersLoading,
+      followersError,
+      followings,
+      followingsLoading,
+      followingsError,
+    ],
   );
-
-  const { repos } = userData || {};
 
   useEffect(() => {
     if (!userData || !userData.user) return;
 
-    if (!userData.repos) {
+    if (!repos) {
       dispatch(getRepos(userData.user.login));
+    }
+
+    if (!followers) {
+      dispatch(getFollowers(userData.user.login));
+    }
+
+    if (!followings) {
+      dispatch(getFollowings(userData.user.login));
     }
   }, [userData.user]);
 
@@ -60,7 +100,7 @@ const UserDetailPage: NextPage = () => {
           onClick={() => setActiveTab(Tabs.FOLLOWERS)}
         >
           {Tabs.FOLLOWERS}
-          <div>(0)</div>
+          <div>({followers?.length || 0})</div>
         </TabButton>
 
         <TabButton
@@ -68,7 +108,7 @@ const UserDetailPage: NextPage = () => {
           onClick={() => setActiveTab(Tabs.FOLLOWINGS)}
         >
           {Tabs.FOLLOWINGS}
-          <div>(0)</div>
+          <div>({followings?.length || 0})</div>
         </TabButton>
       </div>
 

@@ -40,8 +40,22 @@ function getRepos(login: string) {
     .then((r) => r.data);
 }
 
+function getFollowers(login: string) {
+  return axios
+    .get<IUser[]>(`${process.env.api}/users/${login}/followers`)
+    .then((r) => r.data);
+}
+
+function getFollowings(login: string) {
+  return axios
+    .get<IUser[]>(`${process.env.api}/users/${login}/following`)
+    .then((r) => r.data);
+}
+
 export const userApi = {
   search,
   getDetail,
   getRepos,
+  getFollowers,
+  getFollowings,
 };

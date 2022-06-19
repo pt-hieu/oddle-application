@@ -13,7 +13,7 @@ export default function ResultList() {
     useCallback((s) => s.searchPage, []),
   );
 
-  const { incomplete_results, items, total_count } = result || {};
+  const { items, total_count } = result || {};
 
   return (
     <div className="!font-jost">

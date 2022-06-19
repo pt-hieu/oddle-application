@@ -12,7 +12,7 @@ export default memo(function RepoCell({ repoData }: TProps) {
   const { name, forks, stargazers_count } = repoData;
 
   return (
-    <GridCell className="h-[80px] !font-jost">
+    <GridCell className="!h-[80px] !font-jost">
       <div className="font-bold mb-2.5 truncate">{name}</div>
 
       <div className="text-xs">
