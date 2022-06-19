@@ -1,42 +1,41 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
+import { useAppDispatch } from '@/store';
+import { clearResult, setSearchSlice } from '@/store/search.slice';
 
 type TFormPayload = {
   query: string;
 };
 
-type TProps = {
-  onQueryChange?: (query: string) => void | Promise<void>;
-};
+type TProps = {};
 
-export default function SearchForm({ onQueryChange: emitChangeQuery }: TProps) {
+export default function SearchForm({}: TProps) {
+  const dispatch = useAppDispatch();
   const { control, handleSubmit, setValue, watch } = useForm<TFormPayload>();
+
+  const query = watch('query');
 
   const submit = useCallback(
     handleSubmit(({ query }) => {
-      emitChangeQuery?.(query);
+      dispatch(setSearchSlice({ query }));
     }),
-    [emitChangeQuery],
+    [],
   );
 
   const clearQuery = useCallback(() => {
     setValue('query', '');
+    dispatch(clearResult());
   }, []);
 
-  const subscriptionRef = useRef<ReturnType<typeof watch>>();
   useEffect(() => {
-    subscriptionRef.current?.unsubscribe();
+    if (query) {
+      dispatch(setSearchSlice({ query }));
+      return;
+    }
 
-    subscriptionRef.current = watch(() =>
-      handleSubmit(({ query }) => {
-        emitChangeQuery?.(query);
-      }),
-    );
-
-    return () => {
-      subscriptionRef.current?.unsubscribe();
-    };
-  }, [emitChangeQuery]);
+    dispatch(clearResult());
+  }, [query]);
 
   return (
     <form onSubmit={submit} className="relative py-4">
@@ -53,13 +52,15 @@ export default function SearchForm({ onQueryChange: emitChangeQuery }: TProps) {
         )}
       />
 
-      <button
-        onClick={clearQuery}
-        type="button"
-        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black-a38 hover:bg-black-a60 duration-100 w-6 aspect-square"
-      >
-        <span className="fa fa-times text-white" />
-      </button>
+      {!!query && (
+        <button
+          onClick={clearQuery}
+          type="button"
+          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black-a38 hover:bg-black-a60 duration-100 w-6 aspect-square"
+        >
+          <span className="fa fa-times text-white" />
+        </button>
+      )}
     </form>
   );
 }
