@@ -1,9 +1,5 @@
 import Head from 'next/head';
-import { PropsWithChildren, useCallback, useEffect } from 'react';
-
-import { IUserWithDetails } from '@/models/user';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { LOCAL_STORAGE_FAVORITE_KEY, init } from '@/store/favorite.slice';
+import { PropsWithChildren } from 'react';
 
 import Footer from './Footer';
 
@@ -19,25 +15,6 @@ export default function Layout({
   footer = true,
   children,
 }: PropsWithChildren<TProps>) {
-  const favUsers = useAppSelector(useCallback((s) => s.favorite.users, []));
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const favoriteData = localStorage.getItem(LOCAL_STORAGE_FAVORITE_KEY);
-    let users: IUserWithDetails[] = [];
-
-    try {
-      users = JSON.parse(favoriteData || '[]');
-    } catch {}
-
-    if (!users.length) return;
-    dispatch(init(users));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_FAVORITE_KEY, JSON.stringify(favUsers));
-  }, [favUsers]);
-
   return (
     <>
       <Head>
