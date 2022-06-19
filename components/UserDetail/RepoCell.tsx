@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { formatter } from '@/libs/format-number';
+import { compactFormat } from '@/libs/format-number';
 import { IRepository } from '@/models/repository';
 import GridCell from '@/styles/styled-components/GridCell';
 
@@ -18,13 +18,13 @@ export default memo(function RepoCell({ repoData }: TProps) {
       <div className="text-xs">
         {!!stargazers_count && (
           <div>
-            {formatter(stargazers_count)} star{stargazers_count > 1 ? 's' : ''}
+            {compactFormat(stargazers_count)} star{stargazers_count > 1 ? 's' : ''}
           </div>
         )}
 
         {!!forks && (
           <div>
-            {formatter(forks)} fork{forks > 1 ? 's' : ''}
+            {compactFormat(forks)} fork{forks > 1 ? 's' : ''}
           </div>
         )}
       </div>

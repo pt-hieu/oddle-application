@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { memo, useCallback, useEffect } from 'react';
 
-import { formatter } from '@/libs/format-number';
+import { compactFormat } from '@/libs/format-number';
 import { IUser } from '@/models/user';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { like, unlike } from '@/store/favorite.slice';
@@ -62,8 +62,8 @@ export default memo(function UserCell({ userData }: TProps) {
         <div className="text-xs">
           {details?.user && (
             <>
-              <div>{formatter(details.user.following)} followings</div>
-              <div>{formatter(details.user.followers)} followers</div>
+              <div>{compactFormat(details.user.following)} followings</div>
+              <div>{compactFormat(details.user.followers)} followers</div>
             </>
           )}
 

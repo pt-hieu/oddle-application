@@ -74,7 +74,7 @@ export default function Paginator() {
 
   const shouldTranslatePage = currentPage > PIVOT_PAGE;
 
-  if (!result) return null;
+  if (!result || pageCount <= 1) return null;
   return (
     <div className="h-[120px] grid place-content-center">
       <div className="flex gap-4">

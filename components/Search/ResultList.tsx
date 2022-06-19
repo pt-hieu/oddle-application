@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useCallback } from 'react';
 
+import { normalFormat } from '@/libs/format-number';
 import GhLogo from '@/public/gh_logo.png';
 import GhMark from '@/public/gh_mark.png';
 import { useAppSelector } from '@/store';
@@ -32,7 +33,8 @@ export default function ResultList() {
       {result && !!result.items.length && (
         <ResultContainer hasPaginator className="overflow-y-auto">
           <div className="mb-4 text-sm">
-            {total_count} GitHub user{total_count! > 1 ? 's' : ''} found
+            {normalFormat(total_count || 0)} GitHub user
+            {total_count! > 1 ? 's' : ''} found
           </div>
 
           <div className="grid grid-cols-2 gap-x-2.5 gap-y-[26px]">
