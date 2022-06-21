@@ -8,11 +8,14 @@ import { useAppSelector } from '@/store';
 import ResultContainer from '@/styles/styled-components/ResultContainer';
 
 import UserCell from '../UserCell';
+import { useQueryState } from '@/hooks/useQueryState';
 
 export default function ResultList() {
-  const { error, loading, result, query } = useAppSelector(
+  const { error, loading, result } = useAppSelector(
     useCallback((s) => s.searchPage, []),
   );
+
+  const [query] = useQueryState('q')
 
   const { items, total_count } = result || {};
 
@@ -47,7 +50,7 @@ export default function ResultList() {
 
       {result && !result.items.length && (
         <ResultContainer className="grid place-content-center text-center">
-          <div className="fa fa-search mb-[7px] text-4xl opacity-[.54]" />
+          <div className="fa fa-search mb-[7px] text-4xl text-black/[.54] dark:text-gray-600" />
 
           <div className="text-sm">No search result found for</div>
           <b>{query}</b>
@@ -63,6 +66,7 @@ export default function ResultList() {
               width={120}
               height={120}
               layout="fixed"
+              className='dark:brightness-[5]'
             />
           </div>
 
@@ -73,10 +77,11 @@ export default function ResultList() {
               width={139}
               height={57}
               layout="fixed"
+              className='dark:brightness-[5]'
             />
           </div>
 
-          <div className="text-center text-sm max-w-[285px] text-black/50 dark:text-gray-600/50">
+          <div className="text-center text-sm max-w-[285px] text-black/50 dark:text-gray-600/80">
             Enter GitHub username and search users matching the input like
             Google Search, click avatars to view more details, including
             repositories, followers and following.

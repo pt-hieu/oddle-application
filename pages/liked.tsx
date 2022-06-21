@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useCallback } from 'react';
 
+import DarkModeSwitch from '@/components/DarkModeSwitch';
 import Layout from '@/components/Layout';
 import UserCell from '@/components/UserCell';
 import { useAppSelector } from '@/store';
@@ -11,8 +12,9 @@ const LikedPage: NextPage = () => {
 
   return (
     <Layout title="Favorite">
-      <div className="py-4">
+      <div className="py-4 justify-between flex">
         <HeaderTitle>Favorite</HeaderTitle>
+        <DarkModeSwitch />
       </div>
 
       <div className="grid grid-cols-2 gap-x-2.5 gap-y-[26px] h-[calc(100vh-60.8px-16px-72px-16px)] overflow-y-auto">

@@ -4,7 +4,6 @@ import { TSearchParams, TSearchResponse, userApi } from '@/services/user';
 
 type TSearchPageSlice = {
   result?: TSearchResponse;
-  query: string;
   loading: boolean;
   error: boolean;
 };
@@ -34,7 +33,6 @@ const searchPageSlice = createSlice<
   initialState: {
     error: false,
     loading: false,
-    query: '',
   },
   reducers: {
     setSearchSlice(state, action) {
@@ -46,7 +44,6 @@ const searchPageSlice = createSlice<
       state.result = undefined;
       state.loading = false;
       state.error = false;
-      state.query = '';
     },
   },
   extraReducers(builder) {

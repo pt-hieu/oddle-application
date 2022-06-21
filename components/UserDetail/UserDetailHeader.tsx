@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import DarkModeSwitch from '../DarkModeSwitch';
+
 export default function UserDetailHeader() {
   return (
     <div className="flex py-4 justify-between items-center">
@@ -7,7 +9,7 @@ export default function UserDetailHeader() {
         <a className="fa fa-home" />
       </Link>
 
-      <div>switch go here</div>
+      <DarkModeSwitch />
     </div>
   );
 }

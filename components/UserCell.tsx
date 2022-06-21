@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { memo, useCallback, useEffect } from 'react';
 
+import { useQueryState } from '@/hooks/useQueryState';
 import { compactFormat } from '@/libs/format-number';
 import { IUser } from '@/models/user';
 import { useAppDispatch, useAppSelector } from '@/store';
@@ -14,7 +15,6 @@ type TProps = {
 
 export default memo(function UserCell({ userData }: TProps) {
   const { login, avatar_url } = userData;
-  const query = useAppSelector(useCallback((s) => s.searchPage.query, []));
 
   const isFavorite = useAppSelector(
     useCallback(
@@ -22,6 +22,8 @@ export default memo(function UserCell({ userData }: TProps) {
       [login],
     ),
   );
+
+  const [query] = useQueryState<string>('q');
 
   const dispatch = useAppDispatch();
   const details = useAppSelector(
@@ -56,7 +58,7 @@ export default memo(function UserCell({ userData }: TProps) {
       <div className="truncate">
         <div title={login} className="mb-2.5 truncate">
           <b>{query}</b>
-          {login.replace(query, '')}
+          {login.replace(query || '', '')}
         </div>
 
         <div className="text-xs">
