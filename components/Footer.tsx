@@ -20,7 +20,7 @@ export default function Footer() {
   const { pathname } = useRouter();
 
   return (
-    <div className="h-[72px] grid grid-cols-2 py-2 shadow-[0_-4px_4px_0_#0000000D]">
+    <div className="h-[72px] grid grid-cols-2 py-2 shadow-[0_-4px_4px_0_#0000000D] dark:shadow-[0_-4px_4px_0_#ffffff33]">
       {FooterItemsData.map(({ icon, label, path }) => (
         <Link key={label} href={path} passHref>
           <FooterItem active={path === pathname}>

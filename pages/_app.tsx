@@ -10,6 +10,7 @@ import { QueryContext } from '@/contexts/QueryContext';
 import { store } from '@/store';
 import '@/styles/globals.css';
 import '@/styles/tailwind.css';
+import DarkModeInit from '@/components/DarkModeInit';
 
 function MyApp({
   Component,
@@ -23,6 +24,7 @@ function MyApp({
         <FavUserHandler />
 
         <QueryHandler />
+        <DarkModeInit />
 
         <Component {...pageProps} />
       </QueryContext.Provider>

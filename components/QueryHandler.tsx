@@ -19,7 +19,7 @@ export default function QueryHandler({}: TProps) {
   useEffect(() => {
     dispatch(
       setQuery(() => ({
-        payload: { ...queryFromContext },
+        payload: cloneDeep(queryFromContext) || {},
         meta: {
           from: 'query-handler',
         },

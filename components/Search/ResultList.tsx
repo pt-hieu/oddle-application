@@ -37,7 +37,7 @@ export default function ResultList() {
             {total_count! > 1 ? 's' : ''} found
           </div>
 
-          <div className="grid grid-cols-2 gap-x-2.5 gap-y-[26px]">
+          <div className="grid grid-cols-2 gap-x-2.5 gap-y-[26px] pb-4">
             {items!.map((user) => (
               <UserCell key={user.id} userData={user} />
             ))}
@@ -76,7 +76,7 @@ export default function ResultList() {
             />
           </div>
 
-          <div className="text-center text-sm max-w-[285px] text-black/50">
+          <div className="text-center text-sm max-w-[285px] text-black/50 dark:text-gray-600/50">
             Enter GitHub username and search users matching the input like
             Google Search, click avatars to view more details, including
             repositories, followers and following.

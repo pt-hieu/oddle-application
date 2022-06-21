@@ -58,7 +58,7 @@ export default function SearchForm({}: TProps) {
         name="query"
         render={({ field }) => (
           <input
-            className="w-full placeholder:!font-jost !font-jost p-4 border border-black-a42 focus:border-black-a60 focus:outline-none rounded"
+            className="w-full placeholder:!font-jost dark:placeholder:text-white/40 dark:bg-black !font-jost p-4 border border-black-a42 dark:border-white/40 dark:focus:border-white/60 focus:border-black-a60 focus:outline-none rounded"
             placeholder="Enter GitHub username, i.e. gaearon"
             type="text"
             {...field}

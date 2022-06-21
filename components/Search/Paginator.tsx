@@ -11,21 +11,33 @@ export const MAX_PAGE_BUTTON = 6;
 const PIVOT_PAGE = 3;
 
 const NavButton = styled.button(() => [
-  tw`disabled:text-black-a38 w-[34px] h-[34px] rounded-full duration-100`,
+  tw`disabled:text-black-a38 dark:disabled:text-gray-800 dark:text-gray-600 w-[34px] h-[34px] rounded-full duration-100`,
   css`
     box-shadow: 0px 1px 5px 0px #0000001f;
     box-shadow: 0px 2px 2px 0px #00000024;
     box-shadow: 0px 1px 1px 0px #00000033;
+
+    dark {
+      & {
+        box-shadow: 0px 1px 5px 0px #ffffff33;
+      }
+    }
   `,
 ]);
 
 const PageButton = styled.button(({ active }: { active?: boolean }) => [
-  tw`!font-roboto text-black/[.87] w-[34px] h-[34px] rounded duration-100`,
-  active && tw`bg-primary text-white`,
+  tw`!font-roboto text-black/[.87] dark:text-gray-600 w-[34px] h-[34px] rounded duration-100`,
+  active && tw`bg-primary text-white dark:!text-white`,
   css`
     box-shadow: 0px 1px 5px 0px #0000001f;
     box-shadow: 0px 2px 2px 0px #00000024;
     box-shadow: 0px 1px 1px 0px #00000033;
+
+    dark {
+      & {
+        box-shadow: 0px 1px 5px 0px #ffffff33;
+      }
+    }
   `,
 ]);
 

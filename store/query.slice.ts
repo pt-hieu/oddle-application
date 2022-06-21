@@ -22,20 +22,13 @@ const querySlice = createSlice<
 >({
   name: 'query',
   initialState: {},
-  reducers: {
-    // setQuery(_, action) { return action.payload;
-    // },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder.addCase(setQuery, (_, action) => {
       const pl = action.payload().payload;
-      console.log(action.payload().meta, pl);
-
       return pl;
     });
   },
 });
-
-// export const { setQuery } = querySlice.actions;
 
 export default querySlice;

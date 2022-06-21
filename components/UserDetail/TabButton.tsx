@@ -9,7 +9,7 @@ type TProps = {
 };
 
 const ActivableButton = styled.button(({ active }: { active?: boolean }) => [
-  active && tw`text-primary`,
+  active && tw`text-primary dark:!text-primary`,
 ]);
 
 export default function TabButton({
@@ -21,7 +21,7 @@ export default function TabButton({
     <ActivableButton
       onClick={onClick}
       active={active}
-      className="uppercase relative p-2 font-medium text-sm text-black/[.54]"
+      className="uppercase relative p-2 font-medium text-sm text-black/[.54] dark:text-gray-600"
     >
       {children}
 

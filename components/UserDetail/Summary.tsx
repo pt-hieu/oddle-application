@@ -19,7 +19,7 @@ export default function Summary() {
       <div className="!font-arsenal text-[24px] leading-[32px]">{login}</div>
 
       <div className="flex gap-2 items-center !font-jost">
-        <span className="fa fa-building text-black/[.54]"></span>
+        <span className="fa fa-building text-black/[.54] dark:text-gray-600"></span>
         {company || 'N_A'}
       </div>
     </div>
