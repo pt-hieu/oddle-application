@@ -24,9 +24,9 @@ const LikedPage: NextPage = () => {
 
         {!favUsers.length && (
           <div className="col-span-2 h-full grid place-content-center">
-            <span className="fa fa-user-group text-black/[.54] text-2xl mb-2 mx-auto" />
+            <span className="fa fa-user-group text-black/[.54] dark:text-gray-600 text-2xl mb-2 mx-auto" />
 
-            <span className="text-center !font-jost text-sm">
+            <span className="text-center !font-jost text-sm dark:text-gray-600/80">
               Once you like people, you'll see them here.
             </span>
           </div>

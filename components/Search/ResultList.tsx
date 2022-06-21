@@ -9,6 +9,7 @@ import ResultContainer from '@/styles/styled-components/ResultContainer';
 
 import UserCell from '../UserCell';
 import { useQueryState } from '@/hooks/useQueryState';
+import Icon from '@/styles/styled-components/Icon';
 
 export default function ResultList() {
   const { error, loading, result } = useAppSelector(
@@ -50,7 +51,7 @@ export default function ResultList() {
 
       {result && !result.items.length && (
         <ResultContainer className="grid place-content-center text-center">
-          <div className="fa fa-search mb-[7px] text-4xl text-black/[.54] dark:text-gray-600" />
+          <Icon className="fa fa-search mb-[7px] text-4xl" />
 
           <div className="text-sm">No search result found for</div>
           <b>{query}</b>
