@@ -64,7 +64,6 @@ const searchPageSlice = createSlice<
       state.loading = false;
       state.error = false;
       state.result = action.payload;
-      state.query = action.meta.arg.q || '';
     });
   },
 });

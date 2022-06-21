@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useFirstMountState } from 'react-use';
+import { useCallback, useMemo } from 'react';
 import tw from 'twin.macro';
 
-import { useAppDispatch, useAppSelector } from '@/store';
-import { searchUsers } from '@/store/search.slice';
+import { useQueryState } from '@/hooks/useQueryState';
+import { useAppSelector } from '@/store';
 
 export const DEFAULT_PER_PAGE = 12;
 export const MAX_PAGE_BUTTON = 6;
@@ -31,14 +30,11 @@ const PageButton = styled.button(({ active }: { active?: boolean }) => [
 ]);
 
 export default function Paginator() {
-  const isFirstMount = useFirstMountState();
+  const { result } = useAppSelector(useCallback((s) => s.searchPage, []));
 
-  const dispatch = useAppDispatch();
-  const { result, query } = useAppSelector(
-    useCallback((s) => s.searchPage, []),
-  );
-
-  const [currentPage, setCurrentPage] = useState(1);
+  let currentPage: number;
+  const [rawCurrentPage, setCurrentPage] = useQueryState<number>('page');
+  currentPage = Number(rawCurrentPage) || 1;
 
   const total_count = result?.total_count || 0;
   const pageCount = useMemo(
@@ -59,19 +55,6 @@ export default function Paginator() {
     [pageToDisplay],
   );
 
-  useEffect(() => {
-    if (isFirstMount) return;
-
-    dispatch(
-      searchUsers({ q: query, per_page: DEFAULT_PER_PAGE, page: currentPage }),
-    );
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (isFirstMount) return;
-    setCurrentPage(1);
-  }, [query]);
-
   const shouldTranslatePage = currentPage > PIVOT_PAGE;
 
   if (!result || pageCount <= 1) return null;
@@ -79,7 +62,7 @@ export default function Paginator() {
     <div className="h-[120px] grid place-content-center">
       <div className="flex gap-4">
         <NavButton
-          onClick={() => setCurrentPage((p) => p - 1)}
+          onClick={() => setCurrentPage(currentPage! - 1)}
           disabled={currentPage <= 1}
         >
           <span className="fa fa-angle-left" />
@@ -88,7 +71,7 @@ export default function Paginator() {
         <div className="flex gap-2.5">
           {keys.map((key, index) => {
             const page =
-              index + 1 + (shouldTranslatePage ? currentPage - PIVOT_PAGE : 0);
+              index + 1 + (shouldTranslatePage ? currentPage! - PIVOT_PAGE : 0);
 
             return (
               <PageButton
@@ -103,7 +86,7 @@ export default function Paginator() {
         </div>
 
         <NavButton
-          onClick={() => setCurrentPage((p) => p + 1)}
+          onClick={() => setCurrentPage(currentPage! + 1)}
           disabled={currentPage >= pageCount}
         >
           <span className="fa fa-angle-right" />

@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo } from 'react';
 
 import Layout from '@/components/Layout';
 import RepoList from '@/components/UserDetail/RepoList';
@@ -7,6 +7,7 @@ import SocialList from '@/components/UserDetail/SocialList';
 import Summary from '@/components/UserDetail/Summary';
 import TabButton from '@/components/UserDetail/TabButton';
 import UserDetailHeader from '@/components/UserDetail/UserDetailHeader';
+import { useQueryState } from '@/hooks/useQueryState';
 import { userUserData } from '@/hooks/useUserData';
 import { useAppDispatch } from '@/store';
 import {
@@ -22,9 +23,10 @@ enum Tabs {
 }
 
 const UserDetailPage: NextPage = () => {
-  const [activeTab, setActiveTab] = useState<Tabs>(Tabs.REPOSITORIES);
-  const userData = userUserData();
+  let [activeTab, setActiveTab] = useQueryState<Tabs>('active_tab');
+  activeTab = activeTab || Tabs.REPOSITORIES;
 
+  const userData = userUserData();
   const dispatch = useAppDispatch();
 
   const {

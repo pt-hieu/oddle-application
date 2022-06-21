@@ -1,6 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useFirstMountState } from 'react-use';
 
+import { useQueryState } from '@/hooks/useQueryState';
 import { useAppDispatch } from '@/store';
 import { clearResult, setSearchSlice } from '@/store/search.slice';
 
@@ -12,7 +14,18 @@ type TProps = {};
 
 export default function SearchForm({}: TProps) {
   const dispatch = useAppDispatch();
+  const [q, setQ] = useQueryState<string>('q', 'search-form');
+
   const { control, handleSubmit, setValue, watch } = useForm<TFormPayload>();
+
+  const hasEffectRun = useRef(false);
+  useEffect(() => {
+    if (!q) return;
+    if (hasEffectRun.current) return;
+
+    hasEffectRun.current = true;
+    setValue('query', q);
+  }, [q]);
 
   const query = watch('query');
 
@@ -28,13 +41,14 @@ export default function SearchForm({}: TProps) {
     dispatch(clearResult());
   }, []);
 
+  const isFirstMount = useFirstMountState();
   useEffect(() => {
-    if (query) {
-      dispatch(setSearchSlice({ query }));
-      return;
+    if (!query) {
+      dispatch(clearResult());
     }
 
-    dispatch(clearResult());
+    if (isFirstMount) return;
+    setQ(query);
   }, [query]);
 
   return (
