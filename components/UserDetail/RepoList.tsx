@@ -1,6 +1,7 @@
 import { userUserData } from '@/hooks/useUserData';
 import Icon from '@/styles/styled-components/Icon';
 
+import Defer from '../Defer';
 import RepoCell from './RepoCell';
 import { Container } from './SocialList';
 
@@ -29,9 +30,11 @@ export default function RepoList() {
 
       {!repoLoading && !repoError && !!repos?.length && (
         <Container className="grid grid-cols-2 gap-x-2.5 gap-y-6">
-          {repos.map((repo) => (
-            <RepoCell repoData={repo} key={repo.id} />
-          ))}
+          <Defer>
+            {repos.map((repo) => (
+              <RepoCell repoData={repo} key={repo.id} />
+            ))}
+          </Defer>
         </Container>
       )}
     </div>
