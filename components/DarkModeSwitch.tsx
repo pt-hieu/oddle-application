@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import Switch from 'react-switch';
+
+import Switch from './Switch';
 
 function getRoot() {
   return document.getElementsByTagName('html')[0];
@@ -39,5 +40,5 @@ export default function DarkModeSwitch() {
     }
   }, [flag]);
 
-  return <Switch checked={flag} onChange={setFlag} />;
+  return <Switch initialChecked={flag} onChange={setFlag} />;
 }

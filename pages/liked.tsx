@@ -1,11 +1,15 @@
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import { useCallback } from 'react';
 
-import DarkModeSwitch from '@/components/DarkModeSwitch';
 import Layout from '@/components/Layout';
 import UserCell from '@/components/UserCell';
 import { useAppSelector } from '@/store';
 import HeaderTitle from '@/styles/styled-components/HeaderTitle';
+
+const DarkModeSwitch = dynamic(() => import('@/components/DarkModeSwitch'), {
+  ssr: false,
+});
 
 const LikedPage: NextPage = () => {
   const favUsers = useAppSelector(useCallback((s) => s.favorite.users, []));
