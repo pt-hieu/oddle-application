@@ -12,8 +12,7 @@ type TQuerySlice = {
   [k in string]: TQueryValue;
 };
 
-export const setQuery =
-  createAction<PrepareAction<TQuerySlice>>('query/set_query');
+export const setQuery = createAction<TQuerySlice>('query/set_query');
 
 const querySlice = createSlice<
   TQuerySlice,
@@ -25,8 +24,7 @@ const querySlice = createSlice<
   reducers: {},
   extraReducers(builder) {
     builder.addCase(setQuery, (_, action) => {
-      const pl = action.payload().payload;
-      return pl;
+      return action.payload;
     });
   },
 });

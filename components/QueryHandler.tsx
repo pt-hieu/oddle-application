@@ -17,14 +17,9 @@ export default function QueryHandler({}: TProps) {
   const queryFromStore = useAppSelector(useCallback((s) => s.query, []));
 
   useEffect(() => {
-    dispatch(
-      setQuery(() => ({
-        payload: cloneDeep(queryFromContext) || {},
-        meta: {
-          from: 'query-handler',
-        },
-      })),
-    );
+    const clonedContext = cloneDeep(queryFromContext) || {};
+
+    dispatch(setQuery(clonedContext));
   }, [queryFromContext]);
 
   useEffect(() => {

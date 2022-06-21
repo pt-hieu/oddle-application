@@ -15,16 +15,7 @@ export function useQueryState<S extends TQueryValue>(
 
   const hookedSetState = useEvent<Dispatch<S | undefined>>(
     (s) => {
-      dispatch(
-        setQuery(() => ({
-          payload: { ...query, [name]: s },
-          meta: {
-            from: 'use-query-state',
-            name,
-            comp,
-          },
-        })),
-      );
+      dispatch(setQuery({ ...query, [name]: s }));
     },
     [query],
   );
