@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { userUserData } from '@/hooks/useUserData';
 
 export default function Summary() {
@@ -6,11 +8,14 @@ export default function Summary() {
 
   return (
     <div className="flex flex-col items-center p-4">
-      <img
-        src={avatar_url}
-        alt={`${login}'s avatar`}
-        className="w-[160px] aspect-square rounded-full"
-      />
+      <AnimatePresence>
+        <motion.img
+          src={avatar_url}
+          layoutId={avatar_url}
+          alt={`${login}'s avatar`}
+          className="w-[160px] aspect-square rounded-full"
+        />
+      </AnimatePresence>
 
       <div className="!font-arsenal font-bold text-[26px] leading-[36px]">
         {name}

@@ -3,6 +3,7 @@ import App from 'next/app';
 import { ParsedUrlQuery } from 'querystring';
 import { Provider } from 'react-redux';
 
+import DarkModeInit from '@/components/DarkModeInit';
 import FavUserHandler from '@/components/FavUserHandler';
 import GlobalStyles from '@/components/GlobalStyles';
 import QueryHandler from '@/components/QueryHandler';
@@ -10,7 +11,6 @@ import { QueryContext } from '@/contexts/QueryContext';
 import { store } from '@/store';
 import '@/styles/globals.css';
 import '@/styles/tailwind.css';
-import DarkModeInit from '@/components/DarkModeInit';
 
 function MyApp({
   Component,
