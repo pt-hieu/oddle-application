@@ -1,22 +1,23 @@
 import Image from 'next/image';
 import { useCallback } from 'react';
 
+import { useQueryState } from '@/hooks/useQueryState';
 import { normalFormat } from '@/libs/format-number';
 import GhLogo from '@/public/gh_logo.png';
 import GhMark from '@/public/gh_mark.png';
 import { useAppSelector } from '@/store';
+import Icon from '@/styles/styled-components/Icon';
 import ResultContainer from '@/styles/styled-components/ResultContainer';
 
+import Defer from '../Defer';
 import UserCell from '../UserCell';
-import { useQueryState } from '@/hooks/useQueryState';
-import Icon from '@/styles/styled-components/Icon';
 
 export default function ResultList() {
   const { error, loading, result } = useAppSelector(
     useCallback((s) => s.searchPage, []),
   );
 
-  const [query] = useQueryState('q')
+  const [query] = useQueryState('q');
 
   const { items, total_count } = result || {};
 
@@ -42,9 +43,11 @@ export default function ResultList() {
           </div>
 
           <div className="grid grid-cols-2 gap-x-2.5 gap-y-[26px] pb-4">
-            {items!.map((user) => (
-              <UserCell key={user.id} userData={user} />
-            ))}
+            <Defer>
+              {items!.map((user) => (
+                <UserCell key={user.id} userData={user} />
+              ))}
+            </Defer>
           </div>
         </ResultContainer>
       )}
@@ -67,7 +70,7 @@ export default function ResultList() {
               width={120}
               height={120}
               layout="fixed"
-              className='dark:brightness-[5]'
+              className="dark:brightness-[5]"
             />
           </div>
 
@@ -78,7 +81,7 @@ export default function ResultList() {
               width={139}
               height={57}
               layout="fixed"
-              className='dark:brightness-[5]'
+              className="dark:brightness-[5]"
             />
           </div>
 

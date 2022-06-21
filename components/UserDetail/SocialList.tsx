@@ -4,6 +4,7 @@ import tw from 'twin.macro';
 import { IUser } from '@/models/user';
 import Icon from '@/styles/styled-components/Icon';
 
+import Defer from '../Defer';
 import UserCell from '../UserCell';
 
 type TProps = {
@@ -40,9 +41,11 @@ export default function SocialList({ users, error, loading }: TProps) {
 
       {!loading && !error && !!users?.length && (
         <Container className="grid grid-cols-2 gap-x-2.5 gap-y-6">
-          {users.map((user) => (
-            <UserCell key={user.id} userData={user} />
-          ))}
+          <Defer>
+            {users.map((user) => (
+              <UserCell key={user.id} userData={user} />
+            ))}
+          </Defer>
         </Container>
       )}
     </div>
