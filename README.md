@@ -41,10 +41,37 @@ At the root directory:
 3/ Run `npm run dev`  
 4/ Access the application at `http://localhost:8080`
 
-# Disclaimers
+# Disclaimer
 
 During development process, there will be a error like [below] when you hit refresh on the details page. It's expected and hasn't caused any troubles to the application.
 
 ```bash
 Error: The provided `href` (/users/[username]) value is missing query values (username) to be interpolated properly. Read more: https://nextjs.org/docs/messages/href-interpolation-failed
+```
+
+# Dependencies
+
+```json
+"@emotion/babel-preset-css-prop": "^11.2.0",
+"@emotion/css": "^11.9.0",
+"@emotion/react": "^11.9.3",
+"@emotion/server": "^11.4.0",
+"@emotion/styled": "^11.9.3",
+"@reduxjs/toolkit": "^1.8.2",
+"axios": "^0.27.2",
+"dotenv": "^16.0.1",
+"framer-motion": "^6.3.11",
+"lodash": "^4.17.21",
+"next": "^12.0.7",
+"query-string": "^7.1.1",
+"react": "^17.0.2",
+"react-dom": "^17.0.2",
+"react-hook-form": "^7.32.1",
+"react-redux": "^8.0.2",
+"react-switch": "^7.0.0",
+"react-tooltip": "^4.2.21",
+"react-use": "^17.4.0",
+"remove": "^0.1.5",
+"styled-components": "^5.3.5",
+"twin.macro": "^2.8.2"
 ```
