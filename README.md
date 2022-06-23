@@ -1,34 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Feature Checklist
 
-## Getting Started
+- [x] Search users based on `username`
+- [x] Paginate search result
+- [x] Display `username`, `avatar`, `followers` and `followings` in the search result
+- [x] Like and dislike users
+- [x] Preserve favorite list after refreshing
+- [x] View specific user's information
 
-First, run the development server:
+- [ ] Responsiveness
+- [x] Use URL to persist application's states
+- [x] Search while typing
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- [x] Use the provided Figma mockup
+- [ ] Default/fallback image
+- [ ] Display paginator at Search Page if needed
+- [x] Handle loading, error and empty states
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [x] Use GitHub API
+- [x] Use NextJs
+- [x] Use @reduxjs/toolkit
+- [x] Use tailwindcss + styled-components + twin.macro
+- [x] Deploy with URL
+- [x] README.md provided
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [x] Use TypeScript
+- [x] Use SSR
+- [x] Support dark mode
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+# How to setup local environment
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Prerequisite
 
-## Learn More
+- Have NodeJs (ideally v16.14.0) installed
 
-To learn more about Next.js, take a look at the following resources:
+## Steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+At the root directory:  
+1/ Run `npm ci` to install all the necessary dependencies without updating the lock file  
+2/ [Optional] Create file `.env.local` and add variable `GH_ACCESS_TOKEN` to authorized the request to extend the rate limit  
+3/ Run `npm run dev`  
+4/ Access the application at `http://localhost:8080`
