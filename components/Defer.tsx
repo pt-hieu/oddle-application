@@ -39,14 +39,14 @@ export default function Defer({
       idleCallbackRef.current = window.requestIdleCallback(handler, {
         timeout,
       });
-      return;
+
+      return () => {
+        if (!idleCallbackRef.current) return;
+        window.cancelIdleCallback?.(idleCallbackRef.current);
+      };
     }
 
     handler();
-    return () => {
-      if (!idleCallbackRef.current) return;
-      window.cancelIdleCallback?.(idleCallbackRef.current);
-    };
   }, [renderedItemsCount, childrenArray.length, chunkSize]);
 
   return <>{childrenArray.slice(0, renderedItemsCount)}</>;
