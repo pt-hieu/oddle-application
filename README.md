@@ -7,7 +7,7 @@
 - [x] Preserve favorite list after refreshing
 - [x] View specific user's information
 
-- [ ] Responsiveness
+- [x] Responsiveness
 - [x] Use URL to persist application's states
 - [x] Search while typing
 

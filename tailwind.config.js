@@ -11,11 +11,11 @@ module.exports = {
         'red-oddle': '#F44336',
       },
       screens: {
-        mobile: {
-          max: '428px',
-        },
         tablet: {
           max: '1194px',
+        },
+        mobile: {
+          max: '428px',
         },
       },
       fontFamily: {
