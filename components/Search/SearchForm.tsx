@@ -16,7 +16,11 @@ export default function SearchForm({}: TProps) {
   const dispatch = useAppDispatch();
   const [q, setQ] = useQueryState<string>('q', 'search-form');
 
-  const { control, handleSubmit, setValue, watch } = useForm<TFormPayload>();
+  const { control, handleSubmit, setValue, watch } = useForm<TFormPayload>({
+    defaultValues: {
+      query: '',
+    },
+  });
 
   const hasEffectRun = useRef(false);
   useEffect(() => {
