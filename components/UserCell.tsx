@@ -34,7 +34,7 @@ export default memo(function UserCell({ userData }: TProps) {
 
   useEffect(() => {
     if (details) return;
-    // dispatch(getUserDetail(login));
+    dispatch(getUserDetail(login));
   }, [details]);
 
   const addFavorite = useCallback(() => {
@@ -53,6 +53,7 @@ export default memo(function UserCell({ userData }: TProps) {
             className="rounded w-16 aspect-square"
             src={avatar_url}
             alt={`${login}'s avatar`}
+            title={`${login}'s avatar`}
           />
         </a>
       </Link>

@@ -40,7 +40,7 @@ export default function SocialList({ users, error, loading }: TProps) {
       )}
 
       {!loading && !error && !!users?.length && (
-        <Container className="grid grid-cols-2 gap-x-2.5 gap-y-6">
+        <Container className="grid grid-cols-2 gap-x-2.5 gap-y-6 grid-rows-[repeat(auto-fit,minmax(80px,max-content))]">
           <Defer>
             {users.map((user) => (
               <UserCell key={user.id} userData={user} />

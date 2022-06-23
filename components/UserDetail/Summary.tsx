@@ -11,6 +11,7 @@ export default function Summary() {
       <CustomImage
         src={avatar_url}
         alt={`${login}'s avatar`}
+        title={`${login}'s avatar`}
         className="w-[160px] aspect-square rounded-full"
       />
 
@@ -20,8 +21,11 @@ export default function Summary() {
 
       <div className="!font-arsenal text-[24px] leading-[32px]">{login}</div>
 
-      <div className="flex gap-2 items-center !font-jost">
-        <span className="fa fa-building text-black/[.54] dark:text-gray-600"></span>
+      <div
+        title={company ?? 'Not Available'}
+        className="flex gap-2 items-center !font-jost"
+      >
+        <span className="fa fa-building text-black/[.54] dark:text-gray-600" />
         {company || 'N_A'}
       </div>
     </div>
