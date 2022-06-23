@@ -1,0 +1,8 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+img[src=''] {
+  /* transparent */
+  content: url('data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+}
