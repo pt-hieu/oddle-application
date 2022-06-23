@@ -40,3 +40,11 @@ At the root directory:
 2/ [Optional] Create file `.env.local` and add variable `GH_ACCESS_TOKEN` to authorized the request to extend the rate limit  
 3/ Run `npm run dev`  
 4/ Access the application at `http://localhost:8080`
+
+# Disclaimers
+
+During development process, there will be a error like [below] when you hit refresh on the details page. It's expected and hasn't caused any troubles to the application.
+
+```bash
+Error: The provided `href` (/users/[username]) value is missing query values (username) to be interpolated properly. Read more: https://nextjs.org/docs/messages/href-interpolation-failed
+```
