@@ -94,7 +94,7 @@ const UserDetailPage: NextPage = () => {
           active={activeTab === Tabs.REPOSITORIES}
         >
           {Tabs.REPOSITORIES}
-          <div>({repos?.length || 0})</div>
+          <div>({repos?.length ?? 'N_A'})</div>
         </TabButton>
 
         <TabButton
@@ -102,7 +102,7 @@ const UserDetailPage: NextPage = () => {
           onClick={() => setActiveTab(Tabs.FOLLOWERS)}
         >
           {Tabs.FOLLOWERS}
-          <div>({followers?.length || 0})</div>
+          <div>({followers?.length ?? 'N_A'})</div>
         </TabButton>
 
         <TabButton
@@ -110,7 +110,7 @@ const UserDetailPage: NextPage = () => {
           onClick={() => setActiveTab(Tabs.FOLLOWINGS)}
         >
           {Tabs.FOLLOWINGS}
-          <div>({followings?.length || 0})</div>
+          <div>({followings?.length ?? 'N_A'})</div>
         </TabButton>
       </div>
 

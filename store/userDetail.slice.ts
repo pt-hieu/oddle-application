@@ -4,6 +4,8 @@ import { IRepository } from '@/models/repository';
 import { IUser, IUserWithDetails } from '@/models/user';
 import { userApi } from '@/services/user';
 
+import { TRootState } from '.';
+
 type TUserDetailSlice = Record<
   IUserWithDetails['login'],
   {
@@ -27,7 +29,7 @@ type TUserDetailSlice = Record<
 
 export const getUserDetail = createAsyncThunk(
   'user_detail/load_detail',
-  (login: string) => {
+  ({ login, meta: _meta }: { login: string; meta?: IUser }, thunk) => {
     return userApi.getDetail(login);
   },
 );
@@ -59,27 +61,34 @@ const userDetailSlice = createSlice<TUserDetailSlice, {}, 'user_detail'>({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(getUserDetail.pending, (state, action) => {
-      state[action.meta.arg] = {
-        ...state[action.meta.arg],
+      state[action.meta.arg.login] = {
+        ...state[action.meta.arg.login],
         userLoading: true,
         userError: false,
+        user: {
+          ...((state[action.meta.arg.login]?.user || {}) as IUserWithDetails),
+          ...(action.meta.arg.meta || {}),
+        },
       };
     });
 
     builder.addCase(getUserDetail.rejected, (state, action) => {
-      state[action.meta.arg] = {
-        ...state[action.meta.arg],
+      state[action.meta.arg.login] = {
+        ...state[action.meta.arg.login],
         userLoading: false,
         userError: true,
       };
     });
 
     builder.addCase(getUserDetail.fulfilled, (state, action) => {
-      state[action.meta.arg] = {
-        ...state[action.meta.arg],
+      state[action.meta.arg.login] = {
+        ...state[action.meta.arg.login],
         userLoading: false,
         userError: false,
-        user: action.payload,
+        user: {
+          ...((state[action.meta.arg.login]?.user || {}) as IUserWithDetails),
+          ...action.payload,
+        },
       };
     });
 

@@ -32,9 +32,13 @@ export default memo(function UserCell({ userData }: TProps) {
     useCallback((s) => s.userDetail[login], [login]),
   );
 
+  const loadUserData = useCallback(() => {
+    dispatch(getUserDetail({ login, meta: userData }));
+  }, [login]);
+
   useEffect(() => {
     if (details) return;
-    dispatch(getUserDetail(login));
+    loadUserData();
   }, [details]);
 
   const addFavorite = useCallback(() => {
@@ -67,18 +71,31 @@ export default memo(function UserCell({ userData }: TProps) {
         <div className="text-xs">
           {details?.user && (
             <>
-              <div>{compactFormat(details.user.following)} followings</div>
-              <div>{compactFormat(details.user.followers)} followers</div>
+              {!!details.user.following && (
+                <div>{compactFormat(details.user.following)} followings</div>
+              )}
+
+              {!!details.user.followers && (
+                <div>{compactFormat(details.user.followers)} followers</div>
+              )}
             </>
           )}
 
           {details?.userLoading && <div>Loading...</div>}
 
           {details?.userError && (
-            <div
-              title="Failed to fetch data of this user!"
-              className="fa fa-warning"
-            />
+            <div className="flex gap-2">
+              <span
+                title="Failed to fetch data of this user!"
+                className="fa fa-warning"
+              />
+
+              <button
+                onClick={loadUserData}
+                title="Reload data of this user"
+                className="fa fa-redo"
+              />
+            </div>
           )}
         </div>
       </div>

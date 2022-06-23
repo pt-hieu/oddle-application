@@ -15,8 +15,11 @@ export default function Summary() {
         className="w-[160px] aspect-square rounded-full"
       />
 
-      <div className="!font-arsenal font-bold text-[26px] leading-[36px]">
-        {name}
+      <div
+        title={name ?? 'Not Available'}
+        className="!font-arsenal font-bold text-[26px] leading-[36px]"
+      >
+        {name || 'N_A'}
       </div>
 
       <div className="!font-arsenal text-[24px] leading-[32px]">{login}</div>

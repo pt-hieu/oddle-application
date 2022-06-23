@@ -18,7 +18,7 @@ export function userUserData(login?: TUserLogin) {
 
   useEffect(() => {
     if (user) return;
-    dispatch(getUserDetail(login!));
+    dispatch(getUserDetail({ login: login! }));
   }, [user, login]);
 
   return user || {};
