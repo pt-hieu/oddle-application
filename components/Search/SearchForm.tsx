@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useFirstMountState } from 'react-use';
+import { useFirstMountState, useIsomorphicLayoutEffect } from 'react-use';
 
 import { useQueryState } from '@/hooks/useQueryState';
 import { useAppDispatch } from '@/store';
-import { clearResult, setSearchSlice } from '@/store/search.slice';
+import { clearResult } from '@/store/search.slice';
 
 type TFormPayload = {
   query: string;
@@ -31,7 +31,7 @@ export default function SearchForm({}: TProps) {
 
   const submit = useCallback(
     handleSubmit(({ query }) => {
-      dispatch(setSearchSlice({ query }));
+      setQ(query);
     }),
     [],
   );
@@ -42,7 +42,7 @@ export default function SearchForm({}: TProps) {
   }, []);
 
   const isFirstMount = useFirstMountState();
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!query) {
       dispatch(clearResult());
     }
