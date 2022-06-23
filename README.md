@@ -12,8 +12,8 @@
 - [x] Search while typing
 
 - [x] Use the provided Figma mockup
-- [ ] Default/fallback image
-- [ ] Display paginator at Search Page if needed
+- [x] Default/fallback image
+- [x] Display paginator at Search Page if needed
 - [x] Handle loading, error and empty states
 
 - [x] Use GitHub API

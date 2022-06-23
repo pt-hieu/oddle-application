@@ -1,6 +1,6 @@
-import { AnimatePresence } from 'framer-motion';
-
 import { userUserData } from '@/hooks/useUserData';
+
+import CustomImage from '../CustomImage';
 
 export default function Summary() {
   const userData = userUserData();
@@ -8,13 +8,11 @@ export default function Summary() {
 
   return (
     <div className="flex flex-col items-center p-4">
-      <AnimatePresence>
-        <img
-          src={avatar_url}
-          alt={`${login}'s avatar`}
-          className="w-[160px] aspect-square rounded-full"
-        />
-      </AnimatePresence>
+      <CustomImage
+        src={avatar_url}
+        alt={`${login}'s avatar`}
+        className="w-[160px] aspect-square rounded-full"
+      />
 
       <div className="!font-arsenal font-bold text-[26px] leading-[36px]">
         {name}

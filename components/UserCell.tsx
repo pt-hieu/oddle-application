@@ -9,6 +9,8 @@ import { like, unlike } from '@/store/favorite.slice';
 import { getUserDetail } from '@/store/userDetail.slice';
 import GridCell from '@/styles/styled-components/GridCell';
 
+import CustomImage from './CustomImage';
+
 type TProps = {
   userData: IUser;
 };
@@ -47,7 +49,7 @@ export default memo(function UserCell({ userData }: TProps) {
     <GridCell className="grid grid-cols-[64px,1fr,16px] gap-x-2.5">
       <Link href={`/users/${login}`} passHref>
         <a>
-          <img
+          <CustomImage
             className="rounded w-16 aspect-square"
             src={avatar_url}
             alt={`${login}'s avatar`}
