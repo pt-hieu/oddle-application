@@ -30,25 +30,41 @@ function search(params: TSearchParams) {
 
 function getDetail(login: string) {
   return axios
-    .get<IUserWithDetails>(process.env.api + '/users/' + login)
+    .get<IUserWithDetails>(process.env.api + '/users/' + login, {
+      headers: {
+        authorization: process.env.gh_token!,
+      },
+    })
     .then((r) => r.data);
 }
 
 function getRepos(login: string) {
   return axios
-    .get<IRepository[]>(`${process.env.api}/users/${login}/repos`)
+    .get<IRepository[]>(`${process.env.api}/users/${login}/repos`, {
+      headers: {
+        authorization: process.env.gh_token!,
+      },
+    })
     .then((r) => r.data);
 }
 
 function getFollowers(login: string) {
   return axios
-    .get<IUser[]>(`${process.env.api}/users/${login}/followers`)
+    .get<IUser[]>(`${process.env.api}/users/${login}/followers`, {
+      headers: {
+        authorization: process.env.gh_token!,
+      },
+    })
     .then((r) => r.data);
 }
 
 function getFollowings(login: string) {
   return axios
-    .get<IUser[]>(`${process.env.api}/users/${login}/following`)
+    .get<IUser[]>(`${process.env.api}/users/${login}/following`, {
+      headers: {
+        authorization: process.env.gh_token!,
+      },
+    })
     .then((r) => r.data);
 }
 
