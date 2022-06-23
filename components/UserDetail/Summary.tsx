@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 import { userUserData } from '@/hooks/useUserData';
 
@@ -9,9 +9,8 @@ export default function Summary() {
   return (
     <div className="flex flex-col items-center p-4">
       <AnimatePresence>
-        <motion.img
+        <img
           src={avatar_url}
-          layoutId={avatar_url}
           alt={`${login}'s avatar`}
           className="w-[160px] aspect-square rounded-full"
         />

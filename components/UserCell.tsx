@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { memo, useCallback, useEffect } from 'react';
 
@@ -48,9 +47,8 @@ export default memo(function UserCell({ userData }: TProps) {
     <GridCell className="grid grid-cols-[64px,1fr,16px] gap-x-2.5">
       <Link href={`/users/${login}`} passHref>
         <a>
-          <motion.img
+          <img
             className="rounded w-16 aspect-square"
-            layoutId={avatar_url}
             src={avatar_url}
             alt={`${login}'s avatar`}
           />
