@@ -31,7 +31,7 @@ const LikedPage: NextPage = () => {
             <span className="fa fa-user-group text-black/[.54] dark:text-gray-600 text-2xl mb-2 mx-auto" />
 
             <span className="text-center !font-jost text-sm dark:text-gray-600/80">
-              Once you like people, you'll see them here.
+              Once you like people, you&apos;ll see them here.
             </span>
           </div>
         )}
