@@ -37,7 +37,7 @@ export default memo(function UserCell({ userData }: TProps) {
   }, [login]);
 
   useEffect(() => {
-    if (details) return;
+    if (details || process.env.auto_load_userdata !== 'true') return;
     loadUserData();
   }, [details]);
 
@@ -79,6 +79,14 @@ export default memo(function UserCell({ userData }: TProps) {
                 <div>{compactFormat(details.user.followers)} followers</div>
               )}
             </>
+          )}
+
+          {!details && (
+            <button
+              onClick={loadUserData}
+              title="Load data of this user"
+              className="fa fa-ellipsis-h"
+            />
           )}
 
           {details?.userLoading && <div>Loading...</div>}

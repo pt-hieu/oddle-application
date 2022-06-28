@@ -14,6 +14,7 @@ const nextConfig = {
   env: {
     api: 'https://api.github.com',
     gh_token: process.env.GH_ACCESS_TOKEN,
+    auto_load_userdata: process.env.AUTO_LOAD_USERDATA
   },
 };
 
